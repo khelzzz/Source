@@ -1,0 +1,208 @@
+-- Create the main GUI
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local ForceAcceptButton = Instance.new("TextButton")
+local LagButton = Instance.new("TextButton")
+local TitleLabel = Instance.new("TextLabel")
+local CreatorLabel = Instance.new("TextLabel")
+local TimerLabel = Instance.new("TextLabel")
+local HideShowButton = Instance.new("TextButton")
+local UIStroke = Instance.new("UIStroke")
+local NotificationLabel = Instance.new("TextLabel")
+
+-- Set parent to player's PlayerGui
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Configure the frame
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.new(0.15, 0.15, 0.15)
+Frame.Position = UDim2.new(0.5, -100, 0.5, -70)
+Frame.Size = UDim2.new(0, 220, 0, 140)
+Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+Frame.BorderSizePixel = 0
+Frame.BackgroundTransparency = 0.1
+
+-- Configure the frame border
+UIStroke.Parent = Frame
+UIStroke.Color = Color3.new(1, 1, 1)
+UIStroke.Thickness = 2
+
+-- Configure the "Force Accept" button
+ForceAcceptButton.Parent = Frame
+ForceAcceptButton.BackgroundColor3 = Color3.new(0, 0.5, 1)
+ForceAcceptButton.Position = UDim2.new(0.1, 0, 0.4, 0)
+ForceAcceptButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+ForceAcceptButton.Text = "Force Accept"
+ForceAcceptButton.TextColor3 = Color3.new(1, 1, 1)
+ForceAcceptButton.Font = Enum.Font.SourceSansBold
+ForceAcceptButton.TextSize = 18
+ForceAcceptButton.BorderSizePixel = 0
+ForceAcceptButton.BackgroundTransparency = 0.1
+
+-- Configure the "Lag" button
+LagButton.Parent = Frame
+LagButton.BackgroundColor3 = Color3.new(1, 0.3, 0.3)
+LagButton.Position = UDim2.new(0.1, 0, 0.7, 0)
+LagButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+LagButton.Text = "Lag"
+LagButton.TextColor3 = Color3.new(1, 1, 1)
+LagButton.Font = Enum.Font.SourceSansBold
+LagButton.TextSize = 18
+LagButton.BorderSizePixel = 0
+LagButton.BackgroundTransparency = 0.1
+
+-- Configure the title label
+TitleLabel.Parent = Frame
+TitleLabel.BackgroundColor3 = Color3.new(0.15, 0.15, 0.15)
+TitleLabel.Size = UDim2.new(1, 0, 0.3, 0)
+TitleLabel.Position = UDim2.new(0, 0, 0, 0)
+TitleLabel.Text = "MM2 Trade Accepter"
+TitleLabel.TextColor3 = Color3.new(1, 1, 1)
+TitleLabel.Font = Enum.Font.SourceSansBold
+TitleLabel.TextSize = 20
+TitleLabel.BorderSizePixel = 0
+TitleLabel.BackgroundTransparency = 1
+
+-- Configure the creator label
+CreatorLabel.Parent = Frame
+CreatorLabel.BackgroundColor3 = Color3.new(0.15, 0.15, 0.15)
+CreatorLabel.Size = UDim2.new(1, 0, 0.15, 0)
+CreatorLabel.Position = UDim2.new(0, 0, 0.85, 0)
+CreatorLabel.Text = "Created by whyudothistome"
+CreatorLabel.TextColor3 = Color3.new(1, 1, 1)
+CreatorLabel.Font = Enum.Font.SourceSans
+CreatorLabel.TextSize = 14
+CreatorLabel.BorderSizePixel = 0
+CreatorLabel.BackgroundTransparency = 1
+
+-- Configure the timer label
+TimerLabel.Parent = Frame
+TimerLabel.BackgroundColor3 = Color3.new(0.15, 0.15, 0.15)
+TimerLabel.Size = UDim2.new(1, 0, 0.2, 0)
+TimerLabel.Position = UDim2.new(0, 0, 0.2, 0)
+TimerLabel.Text = "Wait 5:00 ⏳"
+TimerLabel.TextColor3 = Color3.new(1, 1, 1)
+TimerLabel.Font = Enum.Font.SourceSansBold
+TimerLabel.TextSize = 18
+TimerLabel.BorderSizePixel = 0
+TimerLabel.BackgroundTransparency = 1
+
+-- Configure the notification label
+NotificationLabel.Parent = ScreenGui
+NotificationLabel.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+NotificationLabel.Size = UDim2.new(0.3, 0, 0.05, 0)
+NotificationLabel.Position = UDim2.new(0.35, 0, 0.9, 0)
+NotificationLabel.Text = ""
+NotificationLabel.TextColor3 = Color3.new(1, 1, 1)
+NotificationLabel.Font = Enum.Font.SourceSansBold
+NotificationLabel.TextSize = 16
+NotificationLabel.BorderSizePixel = 0
+NotificationLabel.BackgroundTransparency = 0.5
+NotificationLabel.Visible = false
+
+-- Configure the "Hide/Show" button
+HideShowButton.Parent = ScreenGui
+HideShowButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+HideShowButton.Position = UDim2.new(0.9, -50, 0.1, 0)
+HideShowButton.Size = UDim2.new(0, 100, 0, 30)
+HideShowButton.Text = "Hide"
+HideShowButton.TextColor3 = Color3.new(1, 1, 1)
+HideShowButton.Font = Enum.Font.SourceSansBold
+HideShowButton.TextSize = 18
+HideShowButton.BorderSizePixel = 0
+HideShowButton.BackgroundTransparency = 0.1
+
+-- Function for displaying notifications
+local function showNotification(message)
+    NotificationLabel.Text = message
+    NotificationLabel.Visible = true
+    wait(2)  -- Display the notification for 2 seconds
+    NotificationLabel.Visible = false
+end
+
+-- Function for the "Force Accept" button
+ForceAcceptButton.MouseButton1Click:Connect(function()
+    showNotification("Wait for countdown to use")
+end)
+
+-- Function for the "Lag" button
+LagButton.MouseButton1Click:Connect(function()
+    showNotification("Wait for countdown to use")
+end)
+
+-- Countdown timer functionality
+local function startTimer()
+    local seconds = 300
+    while seconds > 0 do
+        local minutes = math.floor(seconds / 60)
+        local remainingSeconds = seconds % 60
+        TimerLabel.Text = string.format("Wait %d:%02d ⏳", minutes, remainingSeconds)
+        wait(1)
+        seconds = seconds - 1
+    end
+    TimerLabel.Text = "Rejoin and use it again ⏳"
+    wait(2)  -- Wait for 2 seconds before kicking the player
+    game.Players.LocalPlayer:Kick("Rejoin and use it again")
+end
+
+coroutine.wrap(startTimer)()
+
+-- Hide/Show button functionality
+local isVisible = true
+HideShowButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    Frame.Visible = isVisible
+    HideShowButton.Text = isVisible and "Hide" or "Show"
+end)
+
+-- Dragging functionality
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    Frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+Frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = Frame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+Frame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if dragging and input == dragInput then
+        update(input)
+    end
+end)
+
+-- Function to create a rainbow text effect
+local function rainbowText(button)
+    local hue = 0
+    while true do
+        button.TextColor3 = Color3.fromHSV(hue, 1, 1)
+        hue = hue + 0.01
+        if hue >= 1 then hue = 0 end
+        wait(0.1)
+    end
+end
+
+-- Apply rainbow text effect to buttons
+coroutine.wrap(function() rainbowText(ForceAcceptButton) end)()
+coroutine.wrap(function() rainbowText(LagButton) end)()
